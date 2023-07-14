@@ -3,6 +3,7 @@ package com.facebook.chatbot.webhooks;
 import com.facebook.chatbot.config.Config;
 import com.facebook.chatbot.entity.WebhookPayload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +14,8 @@ import java.net.http.HttpRequest;
 @RestController
 public class EndPoint {
 
-    @Autowired
-    Config config;
+    @Value("${VERIFY_TOKEN}")
+    String verify_token;
 
     @PostMapping("/webhook")
     public ResponseEntity<String> handleWebHookPOSTRequest(@RequestBody WebhookPayload body) {
@@ -34,7 +35,7 @@ public class EndPoint {
         String token = request.getParameter("hub.verify_token");
         String challenge = request.getParameter("hub.challenge");
         if(mode != null && token != null) {
-            String pageAccessToken = config.getVerifyToken();
+            String pageAccessToken = verify_token;
             if(mode.equals("subscribe") && token.equals(pageAccessToken) ) {
                 System.out.println("WEBHOOK_VERIFIED");
                 return new ResponseEntity<>( challenge, HttpStatus.OK);
