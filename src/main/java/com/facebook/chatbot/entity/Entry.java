@@ -1,12 +1,16 @@
 package com.facebook.chatbot.entity;
 
-import java.util.Date;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+@JsonIgnoreProperties(ignoreUnknown = true)
+//@Component
 public class Entry {
     String id;
     long time;
-    List<Messaging> messagingList;
+    List<Messaging> messaging;
 
     public String getId() {
         return id;
@@ -24,11 +28,20 @@ public class Entry {
         this.time = time;
     }
 
-    public List<Messaging> getMessagingList() {
-        return messagingList;
+    public List<Messaging> getMessaging() {
+        return messaging;
     }
 
-    public void setMessagingList(List<Messaging> messagingList) {
-        this.messagingList = messagingList;
+    public void setMessaging(List<Messaging> messaging) {
+        this.messaging = messaging;
+    }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "id='" + id + '\'' +
+                ", time=" + time +
+                ", messaging=" + messaging +
+                '}';
     }
 }

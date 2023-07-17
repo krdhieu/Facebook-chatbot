@@ -4,28 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;
 @JsonIgnoreProperties(ignoreUnknown = true)
 //@Component
-public class Sender {
-    String id;
+public class QuickReply {
+    String payload;
 
-    public Sender(String id) {
-        this.id = id;
+    public String getPayload() {
+        return payload;
     }
 
-    public Sender() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setPayload(String payload) {
+        this.payload = payload;
     }
 
     @Override
     public String toString() {
-        return "Sender{" +
-                "id='" + id + '\'' +
+        return "QuickReply{" +
+                "payload='" + payload + '\'' +
                 '}';
     }
 }

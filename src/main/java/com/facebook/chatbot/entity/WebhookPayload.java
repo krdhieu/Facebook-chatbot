@@ -1,18 +1,14 @@
 package com.facebook.chatbot.entity;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+@JsonIgnoreProperties(ignoreUnknown = true)
+//@Component
 public class WebhookPayload {
     String object;
-    List<Entry> entryList;
-
-    public WebhookPayload(String object, List<Entry> entryList) {
-        this.object = object;
-        this.entryList = entryList;
-    }
-
-    public WebhookPayload() {
-    }
+    List<Entry> entry;
 
     public String getObject() {
         return object;
@@ -22,11 +18,19 @@ public class WebhookPayload {
         this.object = object;
     }
 
-    public List<Entry> getEntryList() {
-        return entryList;
+    public List<Entry> getEntry() {
+        return entry;
     }
 
-    public void setEntryList(List<Entry> entryList) {
-        this.entryList = entryList;
+    public void setEntry(List<Entry> entry) {
+        this.entry = entry;
+    }
+
+    @Override
+    public String toString() {
+        return "WebhookPayload{" +
+                "object='" + object + '\'' +
+                ", entry=" + entry +
+                '}';
     }
 }
